@@ -156,6 +156,8 @@ private void TombolMemuatDataActionPerformed(java.awt.event.ActionEvent evt) {
 
 # 6. Tampilan Pada Saat Aplikasi Di Jalankan
 
+![Tugas6](https://github.com/user-attachments/assets/a9ba17b0-648c-44a3-9861-725fdff4b8de)
+
 
 ## Indikator Penilaian:
 
