@@ -10,9 +10,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /*
@@ -85,7 +88,7 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
 }
     
     // Tampilkan data cuaca di GUI berdasarkan kota
-    private void MenampilkanCuaca(String namakota) {
+    private void MenampilkanCuaca(String namakota) throws JSONException {
         String jsonResponse = MengambilDataCuaca(namakota);
         JSONObject json = new JSONObject(jsonResponse);
 
@@ -191,6 +194,7 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
         LabelDeskripsi = new javax.swing.JLabel();
         LabelHasilSuhu = new javax.swing.JLabel();
         TombolHapus = new javax.swing.JButton();
+        TombolKeluar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Cek Cuaca");
@@ -264,15 +268,31 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
             }
         });
 
+        TombolKeluar.setText("Keluar");
+        TombolKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TombolKeluarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(TombolSimpanCuaca))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(TombolCekCuaca)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(LabelPilihKota)
@@ -282,18 +302,18 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LabelKeadaanCuaca)
                                     .addComponent(DeskripsiCuaca))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(46, 75, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LabelDeskripsi)
                                     .addComponent(LabelIcon)
                                     .addComponent(LabelHasilSuhu)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
                                 .addComponent(TombolMemuatData)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LabelSuhu)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -302,17 +322,11 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
                                 .addComponent(FieldMasukkanNamaKota, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(TombolHapus)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(26, 26, 26))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(TombolSimpanCuaca))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(TombolCekCuaca)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(TombolKeluar)
+                        .addGap(38, 38, 38))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,15 +357,15 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(36, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LabelPilihKota)
                             .addComponent(ComboBoxKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TombolMemuatData)
-                        .addGap(95, 95, 95))))
+                        .addGap(44, 44, 44)
+                        .addComponent(TombolMemuatData))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(TombolKeluar)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -360,8 +374,8 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,7 +391,11 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
     private void TombolCekCuacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TombolCekCuacaActionPerformed
         String namakota = FieldMasukkanNamaKota.getText();
         if (!namakota.isEmpty()) {
-            MenampilkanCuaca(namakota);
+            try {
+                MenampilkanCuaca(namakota);
+            } catch (JSONException ex) {
+                Logger.getLogger(AplikasiCekCuacaSederhana.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             boolean KotaDitemukan = false;
             for (int i = 0; i < ComboBoxKota.getItemCount(); i++) {
@@ -431,7 +449,11 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
             String selectedCity = (String) ComboBoxKota.getSelectedItem();
             FieldMasukkanNamaKota.setText(selectedCity);
-            MenampilkanCuaca(selectedCity);
+            try {
+                MenampilkanCuaca(selectedCity);
+            } catch (JSONException ex) {
+                Logger.getLogger(AplikasiCekCuacaSederhana.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_ComboBoxKotaItemStateChanged
 
@@ -470,6 +492,11 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
         }
     });
     }//GEN-LAST:event_TombolHapusActionPerformed
+
+    private void TombolKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TombolKeluarActionPerformed
+        // TODO add your handling code here:
+         System.exit(0);
+    }//GEN-LAST:event_TombolKeluarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -520,6 +547,7 @@ public class AplikasiCekCuacaSederhana extends javax.swing.JFrame {
     private javax.swing.JTable TabelCuaca;
     private javax.swing.JButton TombolCekCuaca;
     private javax.swing.JButton TombolHapus;
+    private javax.swing.JButton TombolKeluar;
     private javax.swing.JButton TombolMemuatData;
     private javax.swing.JButton TombolSimpanCuaca;
     private javax.swing.JLabel jLabel1;
